@@ -53,8 +53,10 @@ set splitbelow
 set wildmenu                         " Visual autocomplete of commands
 set incsearch                        " Incremental searching
 
-set spell                            " Allow for spell checking
-set spellsuggest=best,10
+autocmd FileType
+        \ gitcommit,markdown
+        \ setlocal spell
+set spellsuggest=best,10             " Set up spelling on specific file types
 
 set nobackup
 set nowritebackup
