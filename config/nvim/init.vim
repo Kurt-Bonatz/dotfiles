@@ -129,7 +129,20 @@ nnoremap <Leader>tw :%s/\s\+$//e<CR>
 :nnoremap <A-h> <C-w>h
 :nnoremap <A-j> <C-w>j
 :nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l " }}}
+:nnoremap <A-l> <C-w>l
+
+:tnoremap ˙ <C-\><C-n><C-w>h     " Map Alt + h/j/k/l on Mac to act like <A-h/j/k/l>
+:vnoremap ˙ <C-w>h
+:nnoremap ˙ <C-w>h
+:tnoremap ∆ <C-\><C-n><C-w>j
+:vnoremap ∆ <C-w>j
+:nnoremap ∆ <C-w>j
+:tnoremap ˚ <C-\><C-n><C-w>k
+:vnoremap ˚ <C-w>k
+:nnoremap ˚ <C-w>k
+:tnoremap ¬ <C-\><C-n><C-w>l
+:vnoremap ¬ <C-w>l
+:nnoremap ¬ <C-w>l " }}}
 
 " Airline                                                                                                        {{{
 let g:airline_powerline_fonts = 1
