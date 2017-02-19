@@ -31,18 +31,19 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1  " Allow the cursor to change shapes for mod
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1    " True color
 set clipboard+=unnamedplus           " Use the system clipboard
 
-set tabstop=4                        " Number of visual spaces per TAB
-set softtabstop=4                    " Number of spaces in tab when editing
+set tabstop=2 softtabstop=2          " Number of visual spaces per TAB
+set shiftwidth=2                     " Number of spaces in tab when editing
 set expandtab                        " Tabs are spaces
-set smarttab
+set shiftround
 filetype indent on                   " Load filetype specific indents
+set list listchars=tab:»·,trail:·,nbsp:·
 
 set ignorecase                       " Ignore case when searching
 set smartcase                        " Factor in case when specified
 set hlsearch                         " Highlight all matching searches
 
 set omnifunc=syntaxcomplete#Complete
-set complete=.,w,b,u,t,i,k
+set complete=.,w,b,u,t,i,k,kspell
 
 set relativenumber                   " Turn on relative numbers
 set number                           " Force the current line number to show in the gutter
@@ -205,7 +206,6 @@ autocmd FileType unite call s:uniteinit()
     \    'ag', '--follow','--nogroup','--hidden', '-g', '', '--ignore', '.git', '--ignore', '*.png'
     \   ] })
   let s:menus = {}
-    call denite#custom#var('grep', 'command', ['rg'])
     call denite#custom#var('grep', 'default_opts',
             \ ['--vimgrep', '--no-heading'])
     call denite#custom#var('grep', 'recursive_opts', [])
