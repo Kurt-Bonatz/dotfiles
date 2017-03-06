@@ -2,18 +2,22 @@
 call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 Plug 'airblade/vim-gitgutter'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'derekwyatt/vim-scala'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'morhetz/gruvbox'
+"Plug '~/Projects/open_source/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neomake/neomake'
+Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'raimondi/delimitmate'
 Plug 'rust-lang/rust.vim'
 Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'tomtom/tcomment_vim'
@@ -28,7 +32,9 @@ call plug#end() " }}}
 
 " Neovim Settings                                                                                                {{{
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1  " Allow the cursor to change shapes for modes
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1    " True color
+if (has("termguicolors"))
+ set termguicolors
+endif
 set clipboard+=unnamedplus           " Use the system clipboard
 
 set tabstop=2 softtabstop=2          " Number of visual spaces per TAB
@@ -73,7 +79,11 @@ set laststatus=2                     " Always display the status line
 
 set undofile                         " Keep track of undos in a directory after closing the buffer
 set undodir=$HOME/.VIM_UNDO_FILES
+
 syntax enable                        " Turn on syntax highlighting
+:let java_highlight_functions="indent"
+:let java_highlight_all=1
+
 
 colorscheme gruvbox
 set background=dark " }}}
@@ -124,6 +134,7 @@ let mapleader=","                    " Map Leader as ,
 :vnoremap <C-/> :TComment<CR>        " Use Ctrl-/ to comment
 :map <Leader><Leader> :noh<CR>       " Kill highlighted words after completed search
 :nnoremap <Leader>tw :%s/\s\+$//e<CR>
+:map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 :tnoremap <A-h> <C-\><C-n><C-w>h     " Navigate windows easier with Alt-h/j/k/l
 :tnoremap <A-j> <C-\><C-n><C-w>j
