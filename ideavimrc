@@ -1,0 +1,29 @@
+set clipboard+=unnamedplus           " Use the system clipboard
+set relativenumber                   " Turn on relative numbers
+set number                           " Force the current line number to show in the gutter
+
+let mapleader=","                    " Map Leader as ,
+
+:vmap < <gv                          " Keep visual selection blocks highlighted when indenting
+:vmap > >gv
+:tnoremap <A-h> <C-\><C-n><C-w>h     " Navigate windows easier with Alt-h/j/k/l
+:tnoremap <A-j> <C-\><C-n><C-w>j
+:tnoremap <A-k> <C-\><C-n><C-w>k
+:tnoremap <A-l> <C-\><C-n><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
+
+:tnoremap ˙ <C-\><C-n><C-w>h         " Map Alt + h/j/k/l on Mac to act like <A-h/j/k/l>
+:vnoremap ˙ <C-w>h
+:nnoremap ˙ <C-w>h
+:tnoremap ∆ <C-\><C-n><C-w>j
+:vnoremap ∆ <C-w>j
+:nnoremap ∆ <C-w>j
+:tnoremap ˚ <C-\><C-n><C-w>k
+:vnoremap ˚ <C-w>k
+:nnoremap ˚ <C-w>k
+:tnoremap ¬ <C-\><C-n><C-w>l
+:vnoremap ¬ <C-w>l
+:nnoremap ¬ <C-w>l
