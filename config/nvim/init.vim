@@ -7,10 +7,8 @@ Plug 'derekwyatt/vim-scala'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'morhetz/gruvbox'
-"Plug '~/Projects/open_source/gruvbox'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neomake/neomake'
-Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'raimondi/delimitmate'
 Plug 'rust-lang/rust.vim'
 Plug 'sbdchd/neoformat'
@@ -18,6 +16,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'tomtom/tcomment_vim'
@@ -25,13 +24,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'wikitopian/hardmode'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 " Add plugins to &runtimepath
 call plug#end() " }}}
 
 " Neovim Settings                                                                                                {{{
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1  " Allow the cursor to change shapes for modes
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50 " Set up our cursor styles and blinking
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
 if (has("termguicolors"))
  set termguicolors
 endif
@@ -84,7 +85,6 @@ syntax enable                        " Turn on syntax highlighting
 :let java_highlight_functions="indent"
 :let java_highlight_all=1
 
-
 colorscheme gruvbox
 set background=dark " }}}
 
@@ -133,7 +133,9 @@ let mapleader=","                    " Map Leader as ,
 :vmap > >gv
 :vnoremap <C-/> :TComment<CR>        " Use Ctrl-/ to comment
 :map <Leader><Leader> :noh<CR>       " Kill highlighted words after completed search
-:nnoremap <Leader>tw :%s/\s\+$//e<CR>
+:nnoremap <Leader>tw :%s/\s\+$//e<CR>" Remove trailing white space
+:nnoremap <Leader>m :Neomake<CR>     " Run lint and compile
+:nnoremap <Leader>f :Neoformat<CR>   " Run autoformatter
 :map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 :tnoremap <A-h> <C-\><C-n><C-w>h     " Navigate windows easier with Alt-h/j/k/l
@@ -179,15 +181,6 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets' " }}}
 
@@ -290,3 +283,18 @@ nnoremap <Leader>g :Denite -start-insert menu:git<CR>
     \[' git prompt', 'exe "Git! " input("command: ")'],
     \] " Append ' --' after log to get commit info commit buffers
 "}}}
+
+" Neomake                                                                                                        {{{
+" When writing a buffer, and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750) "" }}}
+
+" LanguageClient                                                                                                 {{{
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+let g:LanguageClient_serverCommands = {
+     \ 'python': ['pyls'],
+     \ }
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
