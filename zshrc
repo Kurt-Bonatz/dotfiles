@@ -1,0 +1,1 @@
+/home/kurt/.dotfiles/zshrc
