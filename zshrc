@@ -121,3 +121,5 @@ searchdown() {
 zle -N searchdown
 bindkey "^[[B" searchdown
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
