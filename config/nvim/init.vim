@@ -10,12 +10,11 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'chriskempson/base16-vim'
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
@@ -37,16 +36,15 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-colorscheme gruvbox                   " Set the theme to gruvbox
-set background=dark                   " Dark theme
-
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background          " Use terminal base16 theme
+endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-set termguicolors
 
 set clipboard+=unnamedplus            " Use the system clipboard
 
@@ -142,7 +140,7 @@ let mapleader=","                     " Map Leader as ,
 
 map Y y$                              " Treat Y like D and yank till EOL
 map Q gq                              " Don't use Ex mode, use Q for formatting
-nnoremap <Leader>l :nohl<CR>              " Turn off search highlights
+nnoremap <Leader>l :nohl<CR>          " Turn off search highlights
 map <C-n> :NERDTreeToggle<CR>         " Toggle NerdTree
 map <Leader>z ]s<CR>                  " Jump to next misspelled word
 map <Leader>Z [s<CR>
@@ -203,6 +201,7 @@ let g:deoplete#enable_at_startup = 1
 
 let g:ale_sign_column_always = 1
 let g:ale_fixers = {
+\   '*': ['trim_whitespace'],
 \   'rust': ['rustfmt'],
 \}
 

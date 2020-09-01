@@ -1,29 +1,18 @@
 set clipboard+=unnamedplus           " Use the system clipboard
 set relativenumber                   " Turn on relative numbers
 set number                           " Force the current line number to show in the gutter
+set surround                         " Emulate vim-surround
 
 let mapleader=","                    " Map Leader as ,
+:map <Leader>f :action ReformatCode<CR>
 
 :vmap < <gv                          " Keep visual selection blocks highlighted when indenting
 :vmap > >gv
-:tnoremap <A-h> <C-\><C-n><C-w>h     " Navigate windows easier with Alt-h/j/k/l
-:tnoremap <A-j> <C-\><C-n><C-w>j
-:tnoremap <A-k> <C-\><C-n><C-w>k
-:tnoremap <A-l> <C-\><C-n><C-w>l
-:nnoremap <A-h> <C-w>h
-:nnoremap <A-j> <C-w>j
-:nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l
-
-:tnoremap ˙ <C-\><C-n><C-w>h         " Map Alt + h/j/k/l on Mac to act like <A-h/j/k/l>
-:vnoremap ˙ <C-w>h
-:nnoremap ˙ <C-w>h
-:tnoremap ∆ <C-\><C-n><C-w>j
-:vnoremap ∆ <C-w>j
-:nnoremap ∆ <C-w>j
-:tnoremap ˚ <C-\><C-n><C-w>k
-:vnoremap ˚ <C-w>k
-:nnoremap ˚ <C-w>k
-:tnoremap ¬ <C-\><C-n><C-w>l
-:vnoremap ¬ <C-w>l
-:nnoremap ¬ <C-w>l
+:tnoremap <C-h> <C-\><C-n><C-w>h     " Navigate windows easier with Ctrl-h/j/k/l
+:tnoremap <C-j> <C-\><C-n><C-w>j
+:tnoremap <C-k> <C-\><C-n><C-w>k
+:tnoremap <C-l> <C-\><C-n><C-w>l
+:nnoremap <C-h> <C-w>h
+:nnoremap <C-j> <C-w>j
+:nnoremap <C-k> <C-w>k
+:nnoremap <C-l> <C-w>l

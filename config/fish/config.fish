@@ -3,54 +3,56 @@
 ################################################################################
 
 # Git
-abbr -a -g ga git add
-abbr -a -g gaa git add --all
-abbr -a -g gb git branch
-abbr -a -g gba git branch -a
-abbr -a -g gbd git branch -d
-abbr -a -g gbs git bisect
-abbr -a -g gbsb git bisect bad
-abbr -a -g gbsg git good
-abbr -a -g gc git commit -v
-abbr -a -g gc! git commit -v --amend
-abbr -a -g gca git commit -v -a
-abbr -a -g gca! git commit -v -a --amend
-abbr -a -g gcam git commit -v -a -m
-abbr -a -g gcb git checkout -b
-abbr -a -g gcm git checkout master
-abbr -a -g gco git checkout
-abbr -a -g gd git diff
-abbr -a -g gdca git diff --cached
-abbr -a -g gf git fetch
-abbr -a -g gl git pull
-abbr -a -g grb git rebase
-abbr -a -g grbc git rebase --continue
-abbr -a -g grbca git rebase --abort
-abbr -a -g grbm git rebase master
-abbr -a -g gst git status
-abbr -a -g gstp git stash pop
+abbr -a ga git add
+abbr -a gaa git add --all
+abbr -a gb git branch
+abbr -a gba git branch -a
+abbr -a gbd git branch -D
+abbr -a gbs git bisect
+abbr -a gbsb git bisect bad
+abbr -a gbsg git good
+abbr -a gc git commit -v
+abbr -a gc! git commit -v --amend
+abbr -a gca git commit -v -a
+abbr -a gca! git commit -v -a --amend
+abbr -a gcam git commit -v -a -m
+abbr -a gcb git checkout -b
+abbr -a gcm git checkout master
+abbr -a gco git checkout
+abbr -a gd git diff
+abbr -a gdca git diff --cached
+abbr -a gf git fetch
+abbr -a gl git pull
+abbr -a glg git log --oneline
+abbr -a grb git rebase
+abbr -a grbc git rebase --continue
+abbr -a grbca git rebase --abort
+abbr -a grbm git rebase master
+abbr -a gst git status
+abbr -a gstp git stash pop
 
 # Use Rust instead of POSIX
-abbr -a -g cat bat
-abbr -a -g ls exa
-abbr -a -g grep rg
-abbr -a -g find fd
+abbr -a cat bat
+abbr -a find fd
+abbr -a grep rg
+abbr -a ls exa
+abbr -a vimdiff delta
+abbr -a top ytop
+abbr -a htop ytop
+abbr -a cd z
 
 ################################################################################
 # Environment
 ################################################################################
 
 # Path
-set PATH ~/.cargo/bin $PATH
+set PATH ~/.cargo/bin ~/Library/Android/sdk/platform-tools/ $PATH
 
 # Make sure our SHELL is fish
 set --export SHELL /usr/local/bin/fish
 
 # Set NeoVim as the default editor
 set --export EDITOR nvim
-
-# Use bat as git's pager
-set --export GIT_PAGER bat
 
 # Set ANDROID_HOME
 set --export ANDROID_HOME /Users/kbonatz/Library/Android/sdk
@@ -73,10 +75,21 @@ set --export LC_ALL "en_US.UTF-8"
 
 # Remove default fish greeting
 set --erase fish_greeting
+starship init fish | source
+zoxide init fish | source
 
 ################################################################################
 # FZF
 ################################################################################
 
 # Use fd for faster fzf
-set --export FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
+set --export FZF_DEFAULT_COMMAND 'fd --type f'
+set --export FZF_CTRL_T_COMMAND 'fd --type f'
+
+################################################################################
+# Base16 theming
+################################################################################
+if status --is-interactive
+    set BASE16_SHELL "$HOME/.config/base16-shell/"
+    source "$BASE16_SHELL/profile_helper.fish"
+end
