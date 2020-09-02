@@ -93,3 +93,27 @@ if status --is-interactive
     set BASE16_SHELL "$HOME/.config/base16-shell/"
     source "$BASE16_SHELL/profile_helper.fish"
 end
+
+set fish_color_autosuggestion brblack
+set fish_color_cancel \x1d
+set fish_color_command green\x1e\x2d\x2dbold
+set fish_color_comment brblack
+set fish_color_cwd \x1d
+set fish_color_cwd_root red
+set fish_color_end magenta
+set fish_color_error red\x1e\x2d\x2dbold
+set fish_color_escape \x1d
+set fish_color_history_current \x2d\x2dbold
+set fish_color_host \x1d
+set fish_color_host_remote yellow
+set fish_color_match \x1d
+set fish_color_normal white
+set fish_color_operator blue
+set fish_color_param white
+set fish_color_quote green
+set fish_color_redirection magenta
+set fish_color_search_match \x1d
+set fish_color_selection \x1d
+set fish_color_status red
+set fish_color_user \x1d
+set fish_color_valid_path \x2d\x2dunderline
